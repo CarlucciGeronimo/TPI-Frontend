@@ -1,0 +1,10 @@
+/* 
+No reemplazar por un único @import "tailwindcss": 
+las utilidades quedarían debajo de los estilos base de React Native Web 
+y no se aplicarían. 
+*/
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@import "nativewind/theme";
