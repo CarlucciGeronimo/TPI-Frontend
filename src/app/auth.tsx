@@ -4,39 +4,32 @@ import { useState } from "react";
 import { Pressable, ScrollView, Text, View } from "react-native";
 import { Campo } from "../components/Campo";
 import { Segmentado } from "../components/Segmentado";
+import { Selector } from "../components/Selector";
 import { useRol } from "../context/RolContext";
-import { usuarios } from "../mocks/data";
+import { tiposProfesional, usuarios } from "../mocks/data";
 
 type Modo = "login" | "registro";
-type RolPublico = "usuario" | "profesional";
+type RolRegistro = "usuario" | "profesional";
 
 const modos = [
   { valor: "login", etiqueta: "Ingresar" },
   { valor: "registro", etiqueta: "Registrarse" },
 ] as const;
 
-const rolesPublicos = [
+const rolesRegistro = [
   { valor: "usuario", etiqueta: "Usuario" },
   { valor: "profesional", etiqueta: "Profesional" },
 ] as const;
-
-const emailDemo = (rol: RolPublico) => usuarios.find((u) => u.rol === rol)?.email ?? "";
 
 export default function Auth() {
   const router = useRouter();
   const { setRol } = useRol();
   const [modo, setModo] = useState<Modo>("login");
-  const [rolDemo, setRolDemo] = useState<RolPublico>("usuario");
-  const [rolRegistro, setRolRegistro] = useState<RolPublico>("usuario");
-  const [email, setEmail] = useState(emailDemo("usuario"));
-  const [password, setPassword] = useState("12345678");
+  const [rolRegistro, setRolRegistro] = useState<RolRegistro>("usuario");
+  const [tipoProfesional, setTipoProfesional] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [error, setError] = useState("");
-
-  const elegirRolDemo = (rol: RolPublico) => {
-    setRolDemo(rol);
-    setEmail(emailDemo(rol));
-    setError("");
-  };
 
   const ingresar = () => {
     const encontrado = usuarios.find((u) => u.email === email.trim().toLowerCase());
@@ -73,11 +66,6 @@ export default function Auth() {
 
         {modo === "login" ? (
           <View className="mt-6 gap-4">
-            <View className="gap-1.5">
-              <Text className="text-sm font-medium text-black">Entrar como</Text>
-              <Segmentado opciones={rolesPublicos} valor={rolDemo} onCambio={elegirRolDemo} />
-              <Text className="text-xs text-neutral-500">Demostración: completa el email de ejemplo del rol elegido.</Text>
-            </View>
             <Campo
               etiqueta="Email"
               value={email}
@@ -85,6 +73,7 @@ export default function Auth() {
                 setEmail(texto);
                 setError("");
               }}
+              placeholder="tu@email.com"
               keyboardType="email-address"
               autoCapitalize="none"
             />
@@ -108,7 +97,7 @@ export default function Auth() {
           </View>
         ) : (
           <View className="mt-6 gap-4">
-            <Segmentado opciones={rolesPublicos} valor={rolRegistro} onCambio={setRolRegistro} />
+            <Segmentado opciones={rolesRegistro} valor={rolRegistro} onCambio={setRolRegistro} />
             <View className="flex-row gap-3">
               <View className="flex-1">
                 <Campo etiqueta="Nombre" />
@@ -122,7 +111,7 @@ export default function Auth() {
             <Campo etiqueta="Contraseña" secureTextEntry />
             {rolRegistro === "profesional" && (
               <>
-                <Campo etiqueta="Tipo de profesional" placeholder="Electricista, plomero, gasista..." />
+                <Selector etiqueta="Tipo de profesional" opciones={tiposProfesional} valor={tipoProfesional} onCambio={setTipoProfesional} />
                 <Campo etiqueta="Nº de matrícula" />
                 <Campo etiqueta="Zona de trabajo" />
               </>

@@ -45,14 +45,14 @@ export type Presupuesto = {
 };
 
 export const usuarios: Usuario[] = [
-  { id: 1, nombre: "Lucía", apellido: "Fernández", email: "lucia.fernandez@mail.com", telefono: "3465 41-2301", rol: "usuario", activo: true },
-  { id: 2, nombre: "Martín", apellido: "Ríos", email: "martin.rios@mail.com", telefono: "3465 42-7788", rol: "profesional", activo: true },
-  { id: 3, nombre: "Sofía", apellido: "Acosta", email: "sofia.acosta@mail.com", telefono: "3465 40-1190", rol: "admin", activo: true },
-  { id: 4, nombre: "Diego", apellido: "Paredes", email: "diego.paredes@mail.com", telefono: "3465 43-5521", rol: "usuario", activo: true },
-  { id: 5, nombre: "Carla", apellido: "Gómez", email: "carla.gomez@mail.com", telefono: "3465 44-9012", rol: "usuario", activo: true },
-  { id: 6, nombre: "Carlos", apellido: "Benítez", email: "carlos.benitez@mail.com", telefono: "3465 45-3376", rol: "profesional", activo: true },
-  { id: 7, nombre: "Andrea", apellido: "Molina", email: "andrea.molina@mail.com", telefono: "3465 46-8854", rol: "profesional", activo: true },
-  { id: 8, nombre: "Julián", apellido: "Paz", email: "julian.paz@mail.com", telefono: "3465 47-6603", rol: "profesional", activo: false },
+  { id: 1, nombre: "Lucía", apellido: "Fernández", email: "lucia.fernandez@gmail.com", telefono: "3465 41-2301", rol: "usuario", activo: true },
+  { id: 2, nombre: "Martín", apellido: "Ríos", email: "martin.rios@gmail.com", telefono: "3465 42-7788", rol: "profesional", activo: true },
+  { id: 3, nombre: "Sofía", apellido: "Acosta", email: "sofia.acosta@gmail.com", telefono: "3465 40-1190", rol: "admin", activo: true },
+  { id: 4, nombre: "Diego", apellido: "Paredes", email: "diego.paredes@gmail.com", telefono: "3465 43-5521", rol: "usuario", activo: true },
+  { id: 5, nombre: "Carla", apellido: "Gómez", email: "carla.gomez@gmail.com", telefono: "3465 44-9012", rol: "usuario", activo: true },
+  { id: 6, nombre: "Carlos", apellido: "Benítez", email: "carlos.benitez@gmail.com", telefono: "3465 45-3376", rol: "profesional", activo: true },
+  { id: 7, nombre: "Andrea", apellido: "Molina", email: "andrea.molina@gmail.com", telefono: "3465 46-8854", rol: "profesional", activo: true },
+  { id: 8, nombre: "Julián", apellido: "Paz", email: "julian.paz@gmail.com", telefono: "3465 47-6603", rol: "profesional", activo: false },
 ];
 
 export const profesionales: Profesional[] = [
@@ -119,3 +119,16 @@ export function nombreDe(idUsuario: number) {
   const u = usuarios.find((x) => x.id === idUsuario);
   return u ? `${u.nombre} ${u.apellido}` : "";
 }
+
+export const tiposProfesional = [
+  "Electricista",
+  "Plomero",
+  "Gasista",
+  "Pintor",
+  "Carpintero",
+  "Albañil",
+  "Herrero",
+  "Cerrajero",
+  "Técnico en aire acondicionado",
+  "Jardinero",
+] as const;
